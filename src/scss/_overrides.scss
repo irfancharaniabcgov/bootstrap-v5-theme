@@ -1,3 +1,5 @@
+@use "sass:map";
+
 //---------------------------------------------------------------------------------------
 // Overrides Bootstrap classes are change here, consider changing a variable before
 // overriding classes.
@@ -92,7 +94,7 @@ main {
 
 //Theme-color function is initizled as it was dropped with version 5 migration
 @function theme-color($color-name){
-    @return map-get($map: $theme-colors, $key: $color-name);
+    @return map.get($theme-colors, $color-name);
 }
 
 // Header, adds the gold bottom border and shadow
@@ -127,4 +129,3 @@ footer nav {
 .alert.alert-warning {
   border-color: color-level(warning, -4);
 }
-
