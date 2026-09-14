@@ -1,7 +1,7 @@
 {
   "name": "bootstrap-theme",
   "description": "Government of British Columbia Bootstrap v5 theme",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "repository": "",
   "license": "Apache-2.0",
@@ -10,7 +10,7 @@
   },
   "scripts": {
     "start": "webpack serve",
-    "build": "webpack build --mode=production",
+    "build": "webpack build --mode=production && node scripts/generate-dist-package.js",
     "test": "npm run build"
   },
   "dependencies": {
