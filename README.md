@@ -48,7 +48,7 @@ We combined the best of all projects and leverage the latest
 
         You'll need the following tools installed on your device:
         
-        * [NodeJS 20 LTS+](https://nodejs.org/en/) with NPM 10+ to build
+        * [NodeJS 24 LTS+](https://nodejs.org/en/) with npm 11+ to build
 
     - #### First Install
 
