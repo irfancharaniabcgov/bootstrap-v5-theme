@@ -14,6 +14,10 @@ module.exports = {
     filename: 'js/bootstrap-theme.min.js',
     path: path.resolve(__dirname, 'dist'),
   },
+  performance: {
+    assetFilter: assetFilename => !/\.(woff|woff2)$/i.test(assetFilename),
+    maxEntrypointSize: 350000,
+  },
   /*
   optimization: {
     minimize: false // to ensure the output isn't minfied

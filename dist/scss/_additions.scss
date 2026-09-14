@@ -1,3 +1,5 @@
+@use "sass:map";
+
 //---------------------------------------------------------------------------------------
 // Additions are for extra classes not found in the normal Bootstrap
 // WARNING: Do not create alot of new things here, remember always try to tweak and variable
@@ -40,7 +42,7 @@ $info-alert-border-level: -4;
 
 //Theme-color function is initizled as it was dropped with version 5 migration
 @function theme-color($color-name){
-    @return map-get($map: $theme-colors, $key: $color-name);
+    @return map.get($theme-colors, $color-name);
 }
 
 // Add panel-success, panel-info etc. equivalents (like bootstrap v3)

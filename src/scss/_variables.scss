@@ -1,3 +1,5 @@
+@use "sass:map";
+
 // Change theme-colors
 $theme-colors: (
   primary: #38598a,
@@ -16,7 +18,7 @@ $theme-colors: (
 
 //Theme-color function is initizled as it was dropped with version 5 migration
 @function theme-color($color-name){
-  @return map-get($map: $theme-colors, $key: $color-name);
+  @return map.get($theme-colors, $color-name);
 }
 
 // Add our font as default
