@@ -4,6 +4,11 @@ import '../scss/bootstrap-theme.scss'
 // Import all of Bootstrap's JS
 import * as bootstrap from 'bootstrap'
 
+// Expose Bootstrap's JS API as `window.bootstrap` (see webpack.config.js `output.library`)
+// so consumers can call e.g. `bootstrap.Tooltip.getOrCreateInstance(el)` on demand, without
+// also needing to load a separate vanilla Bootstrap bundle just for its JS API surface.
+export default bootstrap
+
 //for popovers everywhere
 // enable popovers everywhere
 const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')

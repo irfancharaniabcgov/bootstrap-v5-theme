@@ -8,11 +8,15 @@ const CopyPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   mode: 'development',
-  entry: ['./src/js/bootstrap-theme.js',
-    './src/scss/bootstrap-theme.scss'],
+  entry: './src/js/bootstrap-theme.js',
   output: {
     filename: 'js/bootstrap-theme.min.js',
     path: path.resolve(__dirname, 'dist'),
+    library: {
+      name: 'bootstrap',
+      type: 'window',
+      export: 'default'
+    }
   },
   performance: {
     assetFilter: assetFilename => !/\.(woff|woff2)$/i.test(assetFilename),
