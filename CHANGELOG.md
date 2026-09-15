@@ -1,5 +1,44 @@
 # Changelog
 
+## 1.1.0
+
+### JavaScript
+
+- `bootstrap-theme.min.js` now exposes a `window.bootstrap` global (via webpack's
+  `output.library`), giving consumers direct access to the same Bootstrap JS API the theme already
+  bundles internally (e.g. `bootstrap.Tooltip`, `bootstrap.Popover`, `bootstrap.Modal`, ...).
+  Previously this bundle was a private closure with no exported API — it only auto-initialized
+  tooltips/popovers present in the DOM at script-load time and could not be used to construct or
+  manage Bootstrap JS components afterward.
+- This is an **additive, backward-compatible** change: the existing tooltip/popover auto-init
+  behavior is unchanged, and no existing consumer that doesn't reference `window.bootstrap` is
+  affected.
+- **Compatibility rule (new):** load exactly one Bootstrap JavaScript distribution per page. When
+  using `bootstrap-theme.min.js`, do not additionally load `bootstrap.js`, `bootstrap.bundle.js`,
+  or any other package's Bootstrap bundle on the same page — doing so results in ambiguous
+  ownership of the `window.bootstrap` global (whichever script runs/assigns last wins) and can
+  produce duplicate component instances/event listeners if the same elements are initialized by
+  both bundles.
+- **Migration note:** if you currently load this theme for its CSS *and* a separate vanilla
+  Bootstrap script (e.g. `bootstrap.bundle.min.js`) purely to get a `window.bootstrap` JS API, you
+  can now remove that separate script — `bootstrap-theme.min.js` provides the same global as of
+  this version.
+- **Dynamic content guidance:** to initialize a tooltip/popover on an element added to the DOM
+  *after* this script's own auto-init pass has already run (e.g. content rendered later by a JS
+  framework), use `bootstrap.Tooltip.getOrCreateInstance(el)` /
+  `bootstrap.Popover.getOrCreateInstance(el)` rather than calling `new bootstrap.Tooltip(el)` /
+  `new bootstrap.Popover(el)` directly — calling the constructor again on an element that may
+  already have an instance is not safe and can create duplicate instances/handlers.
+
+
+## 1.0.2
+
+### Dependencies
+
+- Update to Bootstrap v5.3.8
+- Update NPM packages to address security warnings
+
+
 ## 1.0.0
 
 ## SCSS Changes
@@ -29,7 +68,7 @@
 ### General Updates
 
 - `theme-color()` function has been dropped, new function defined
-- `hover-focus` mixin now dropped, new mixin initialized  
+- `hover-focus` mixin now dropped, new mixin initialized
 - webpack.config.js →  `file-loader` has been deprecated, `assest-modules` are recommended
     -  `Rule.generator.filename` property is used instead to specify the path output and the correct file name.
 
@@ -61,8 +100,8 @@
 - In example select > `form-control` updated to `form-select`
 - added `has-validation` to `is-valid` and `is-invalid` classes
 - Dropped `input-group-prepend` and `input-group-append`
-    - deleted `input-group-prepend` div, span remains 
-    - deleted `input-group-append` div, span remains 
+    - deleted `input-group-prepend` div, span remains
+    - deleted `input-group-append` div, span remains
 
 ### Forms
 
@@ -80,7 +119,7 @@
 
 ### Indicators
 
-- (breaking) updatated `data-dismiss` to `data-bs-dismiss` 
+- (breaking) updatated `data-dismiss` to `data-bs-dismiss`
 - `alert alert-dismissible alert-warning` changed to `alert alert-warning alert-dismissible fade show` for correct alignment.
 - removed `&times;` use of background image, instead of needing to hardcode `&times;`
 - (breaking) `close` changed to `btn-close`
@@ -108,7 +147,7 @@ Version 4
 ```
 - `progress-multiple` updated to follow new conventions
 - Contextual alternatives → `aria-labels` added / declarations moved to the outer div to follow naming conventions.
-- width now specified within the div `progress-bar w-25` instead of a specified style tag, height is no longer specified 
+- width now specified within the div `progress-bar w-25` instead of a specified style tag, height is no longer specified
 
 ### Containers
 
